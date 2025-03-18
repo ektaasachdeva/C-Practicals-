@@ -508,6 +508,98 @@ int main() {
    return 0; 
 }
 ```
+# ques 10
+```cpp
+#include <iostream> 
+using namespace std; 
+
+class Triangle { 
+public: 
+   // Area with base & height 
+   double area(double base, double height) { 
+   return 0.5 *base*height; 
+   } 
+
+   // Area with 3 sides (Heron's formula) 
+   double area(double a, double b, double c) { 
+      double s (a + b + c) / 2; 
+      return sqrt(s* (s-a)*(s-b)*(s-c)); 
+   } 
+}; 
+
+int main() { 
+   Triangle t; 
+   cout << "Area (Base, Height): " << t.area(7, 13) << endl; 
+   cout << "Area (Three Sides): " << t.area(2, 5, 9) << endl; 
+   return 0;
+}
+```
+# ques 11
+```cpp
+#include <iostream> 
+#include <stdexcept> 
+using namespace std; 
+
+class MatrixException: public exception { 
+public: 
+   const char* what() const throw() { 
+      return "Matrix dimensions are incompatible!"; 
+   } 
+}; 
+
+void checkCompatibility(int rows1, int cols1, int rows2, int cols2) { 
+   if (cols1 != rows2) throw MatrixException(); 
+} 
+
+int main() { 
+   try { 
+      checkCompatibility(2, 6, 4, 2); 
+   } catch (MatrixException e) { 
+      cout << "Eггог: <<<< e.what() << endl; 
+   } 
+   return 0; 
+}
+```
+# ques 12
+```cpp
+#include <iostream> 
+#include <stdexcept> 
+using namespace std; 
+
+class PrimeException: public exception { 
+public: 
+   const char what() const throw() { 
+       return "Number must be greater than 11"; 
+   } 
+}; 
+
+// Function to check if a number is prime 
+bool isPrime(int num) { 
+   if (num < 2) 
+      throw PrimeException(); 
+   for(int i=2; i*i <=num; i++) { 
+      if (num % i == 0) 
+         return false; 
+   }
+   return true; 
+}
+
+int main() { 
+   int num; 
+   cout << "Enter a number: "; 
+   cin >> num; 
+
+   try { 
+      if (isPrime(num)) 
+      cout << num << " is a prime number.\n"; 
+      else 
+         cout << num << " is not a prime number.\n"; 
+   } catch (PrimeException& e) { 
+      cout << "Eггог: " <<e.what() << endl; 
+   } 
+   return 0;    
+}
+```
 
 
 
